@@ -1,6 +1,6 @@
 import React from "react";
 
-const AddButton =()=>{
+const AddButton =props=>{
   const buttonStyles ={
     position:"absolute",
     top:"20px",
@@ -16,7 +16,7 @@ const AddButton =()=>{
  return(
    <button
     style={buttonStyles}
-    onClick={"something will be done"}
+    onClick={props.addInputForm}
    >
      Add Product
    </button>
