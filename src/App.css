@@ -1,0 +1,41 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin: 0 auto;
+}
+
+table {
+    border: solid 1px rgb(233, 233, 233);
+    border-collapse: collapse;
+}
+
+td,
+th {
+    padding: 0.35em 0.25em;
+    text-align: center;
+}
+
+tr:nth-of-type(even) {
+    background-color: rgb(235, 242, 245);
+}
+
+.product-title,
+.votes {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: large;
+}
+
+.btn {
+    width: 30px;
+    margin: 0 10px;
+    font-size: 1em;
+    font-family: serif;
+    border: none;
+    color: black;
+    background-color: rgb(191, 195, 201);
+}
+
+.btn:hover {
+    cursor: pointer;
+}

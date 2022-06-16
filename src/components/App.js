@@ -2,6 +2,7 @@ import React,{useState} from "react";
 import Header from "./Header";
 import ProductList from "./ProductList";
 
+import '../App.css' 
 const App =()=>{
   const [products, setProducts] =useState([
     {
@@ -43,15 +44,16 @@ const App =()=>{
   )
  }
   return(
-    <>
+    <div className="container">
       <Header />
       <ProductList 
+        className="product-list"
         productProps={products}
         handleUpVote={upVote}
         handleDownVote={downVote}
       
       />
-    </>
+    </div>
   )
 }
 export default App

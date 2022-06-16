@@ -6,10 +6,10 @@ const ProductList =props=>{
     <table> 
         <thead>
           <tr>
-            <th>Product name</th>
-            <th>Votes count</th>
-            <th>Upvote</th>
-            <th>Downvote</th>
+            <th>Product Name</th>
+            <th>Votes Count</th>
+            <th>Up Vote</th>
+            <th>Down Vote</th>
           </tr>
         </thead>
           <tbody>  
