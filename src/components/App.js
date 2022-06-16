@@ -1,9 +1,8 @@
 import React,{useState} from "react";
 import Header from "./Header";
-import Product from "./Product";
+import ProductList from "./ProductList";
 
 const App =()=>{
-
   const [products, setProducts] =useState([
     {
       id:1,
@@ -21,17 +20,33 @@ const App =()=>{
       votes:0,
     },
   ])
- const upVote =()=>{
-   console.log("Upvoting...")
+  
+  
+ const upVote =(id)=>{
+   setProducts(
+     products.map(product=>
+       product.id === id
+       ? {...product, votes: product.votes+1}
+       : product
+      )
+   )
  }
- const downVote=()=>{
-   console.log("Downvoting...")
+ const downVote=(id)=>{
+  setProducts(
+     products.map(product=>{
+     if(product.id === id){
+       return {...product, votes: product.votes-1}
+     }else{
+       return product
+     } 
+   })
+  )
  }
   return(
     <>
       <Header />
-      <Product 
-        products={products}
+      <ProductList 
+        productProps={products}
         handleUpVote={upVote}
         handleDownVote={downVote}
       
