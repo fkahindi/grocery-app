@@ -1,27 +1,28 @@
 import React,{useState} from "react";
 import Header from "./Header";
 import ProductList from "./ProductList";
+import {v4 as uuidv4} from 'uuid'
 
 import '../App.css' 
+import AddProduct from "./AddProduct";
 const App =()=>{
   const [products, setProducts] =useState([
     {
-      id:1,
+      id:uuidv4(),
       title:"Oranges",
       votes:0,
     },
     {
-      id:2,
+      id:uuidv4(),
       title:"Mangoes",
       votes:0,
     },
     {
-      id:3,
+      id:uuidv4(),
       title:"Bananas",
       votes:0,
     },
   ])
-  
   
  const upVote =(id)=>{
    setProducts(
@@ -43,9 +44,21 @@ const App =()=>{
    })
   )
  }
+ const addProductItem =title=>{
+   const newProduct ={
+     id:uuidv4(),
+     title:title,
+     votes:0,
+   }
+  setProducts(
+    [...products, newProduct]
+  )
+   console.log("Adding product...")
+ }
   return(
     <div className="container">
       <Header />
+      <AddProduct addProductItemProps={addProductItem}/>
       <ProductList 
         className="product-list"
         productProps={products}
