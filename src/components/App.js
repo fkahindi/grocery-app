@@ -61,7 +61,10 @@ const App =()=>{
  }
   return(
     <div className="container">
-      <Header addInputForm={handleShowInputForm}/>
+      <Header 
+        addInputForm={handleShowInputForm}
+        showForm ={showInputForm}
+      />
       {showInputForm && <AddProduct addProductProps={addNewProduct}/>}
       <ProductList 
         className="product-list"

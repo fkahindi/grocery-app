@@ -1,3 +1,9 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -41,17 +47,24 @@ th {
     text-align: center;
 }
 
+td:nth-of-type(1),
+th:nth-of-type(1) {
+    text-align: left;
+    text-indent: 1em;
+}
+
 th {
-    background-color: aliceblue;
-    font-family: Tahoma, 'Segoe UI', Geneva, Verdana, sans-serif;
+    background-color: powderblue;
+    font-family: sans-serif, Tahoma, 'Segoe UI', Geneva, Verdana;
+    font-size: 1.2rem;
 }
 
 tr:nth-of-type(even) {
-    background-color: rgb(235, 242, 245);
+    background-color: silver;
 }
 
 tr:nth-of-type(odd) {
-    background-color: lightgrey;
+    background-color: ghostwhite;
 }
 
 .product-title,
@@ -66,10 +79,22 @@ tr:nth-of-type(odd) {
     font-size: 1em;
     font-family: serif;
     border: none;
-    color: black;
-    background-color: rgb(191, 195, 201);
+    color: white;
+    background-color: darkslategray;
 }
 
 .btn:hover {
+    cursor: pointer;
+}
+
+.add-btn {
+    position: absolute;
+    top: 20px;
+    right: 10%;
+    width: 100px;
+    padding: 10px;
+    border: none;
+    border-radius: calc(0.5*50px);
+    color: white;
     cursor: pointer;
 }

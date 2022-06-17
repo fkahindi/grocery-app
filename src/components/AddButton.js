@@ -1,24 +1,14 @@
 import React from "react";
 
-const AddButton =props=>{
-  const buttonStyles ={
-    position:"absolute",
-    top:"20px",
-    right:"10%",
-    width:"100px",
-    padding: "10px",
-    border:"none",
-    borderRadius:"calc(0.5*50px)",
-    backgroundColor:"teal",
-    color:"white",
-    cursor:"pointer"
-  }
+const AddButton =({background,text, showInputForm})=>{
+  
  return(
    <button
-    style={buttonStyles}
-    onClick={props.showInputForm}
+    className="add-btn"
+    style={{ backgroundColor:background}}
+    onClick={showInputForm}
    >
-     Add Product
+     {text}
    </button>
  )
 }
