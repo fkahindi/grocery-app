@@ -41,8 +41,17 @@ th {
     text-align: center;
 }
 
+th {
+    background-color: aliceblue;
+    font-family: Tahoma, 'Segoe UI', Geneva, Verdana, sans-serif;
+}
+
 tr:nth-of-type(even) {
     background-color: rgb(235, 242, 245);
+}
+
+tr:nth-of-type(odd) {
+    background-color: lightgrey;
 }
 
 .product-title,

@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from "react";
+import React,{useState, useEffect} from "react";
 import Header from "./Header";
 import ProductList from "./ProductList";
 import {v4 as uuidv4} from 'uuid'
@@ -6,25 +6,23 @@ import {v4 as uuidv4} from 'uuid'
 import '../App.css' 
 import AddProduct from "./AddProduct";
 const App =()=>{
-  const [products, setProducts] =useState([
-    {
-      id:uuidv4(),
-      title:"Oranges",
-      votes:0,
-    },
-    {
-      id:uuidv4(),
-      title:"Mangoes",
-      votes:0,
-    },
-    {
-      id:uuidv4(),
-      title:"Bananas",
-      votes:0,
-    },
-  ])
+  const [products, setProducts] =useState(getInitialProducts())
 
- const addProduct =title=>{
+  function getInitialProducts(){
+    //get stored items
+    const temp = localStorage.getItem("products")
+    const savedProducts = JSON.parse(temp)
+    return savedProducts || []
+  }
+
+  useEffect(()=>{
+    //storing products    
+    const temp = JSON.stringify(products)
+    localStorage.setItem("products",temp)
+
+  },[products])
+
+ const addNewProduct =title=>{
    const newProduct ={
      id:uuidv4(),
      title:title,
@@ -40,6 +38,7 @@ const App =()=>{
  const handleShowInputForm=()=>{
   setShowInputForm(!showInputForm)
  }
+
  const upVote =(id)=>{
    setProducts(
      products.map(product=>
@@ -62,13 +61,12 @@ const App =()=>{
   return(
     <div className="container">
       <Header addInputForm={handleShowInputForm}/>
-      {showInputForm && <AddProduct addProductProps={addProduct}/>}
+      {showInputForm && <AddProduct addProductProps={addNewProduct}/>}
       <ProductList 
         className="product-list"
         productProps={products}
         handleUpVote={upVote}
-        handleDownVote={downVote}
-      
+        handleDownVote={downVote}      
       />
     </div>
   )
