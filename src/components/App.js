@@ -26,6 +26,7 @@ const App =()=>{
    const newProduct ={
      id:uuidv4(),
      title:title,
+     price:(Math.random()*(1-0)+0).toFixed(2),
      votes:0,
    }
   setProducts(

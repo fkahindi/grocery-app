@@ -7,6 +7,7 @@ const ProductList =props=>{
         <thead>
           <tr>
             <th>Product Name</th>
+            <th>Price</th>
             <th>Votes Count</th>
             <th>Up Vote</th>
             <th>Down Vote</th>
