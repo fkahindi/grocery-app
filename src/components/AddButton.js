@@ -16,7 +16,7 @@ const AddButton =props=>{
  return(
    <button
     style={buttonStyles}
-    onClick={props.addInputForm}
+    onClick={props.showInputForm}
    >
      Add Product
    </button>

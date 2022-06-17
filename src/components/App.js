@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
 import Header from "./Header";
 import ProductList from "./ProductList";
 import {v4 as uuidv4} from 'uuid'
@@ -23,7 +23,23 @@ const App =()=>{
       votes:0,
     },
   ])
-  
+
+ const addProduct =title=>{
+   const newProduct ={
+     id:uuidv4(),
+     title:title,
+     votes:0,
+   }
+  setProducts(
+    [...products, newProduct]
+  )
+ }
+
+ const [showInputForm, setShowInputForm] =useState(false)
+ 
+ const handleShowInputForm=()=>{
+  setShowInputForm(!showInputForm)
+ }
  const upVote =(id)=>{
    setProducts(
      products.map(product=>
@@ -33,32 +49,20 @@ const App =()=>{
       )
    )
  }
+
  const downVote=(id)=>{
   setProducts(
-     products.map(product=>{
-     if(product.id === id){
-       return {...product, votes: product.votes-1}
-     }else{
-       return product
-     } 
-   })
-  )
- }
- const addProductItem =title=>{
-   const newProduct ={
-     id:uuidv4(),
-     title:title,
-     votes:0,
-   }
-  setProducts(
-    [...products, newProduct]
-  )
-   console.log("Adding product...")
+     products.map(product=>
+      product.id === id
+       ? {...product, votes: product.votes-1}
+       : product
+      )
+    )
  }
   return(
     <div className="container">
-      <Header />
-      <AddProduct addProductItemProps={addProductItem}/>
+      <Header addInputForm={handleShowInputForm}/>
+      {showInputForm && <AddProduct addProductProps={addProduct}/>}
       <ProductList 
         className="product-list"
         productProps={products}

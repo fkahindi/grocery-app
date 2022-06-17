@@ -5,6 +5,31 @@
     margin: 0 auto;
 }
 
+.form-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+    padding: 1em;
+    border-radius: calc(0.5 * 100px);
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.38);
+}
+
+.input-text {
+    font-size: 1rem;
+    font-weight: 400;
+    width: 85%;
+    padding-right: 5px;
+    padding-left: 10px;
+    border: thin solid lightgray;
+    border-radius: calc(0.5 * 100px);
+    transition: ease-in-out, width .35s ease-in-out;
+}
+
+.input-text:focus {
+    border: none;
+}
+
 table {
     border: solid 1px rgb(233, 233, 233);
     border-collapse: collapse;

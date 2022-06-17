@@ -9,11 +9,11 @@ const AddProduct =props=>{
   const inputFocus = useRef(inputText)
   useEffect(()=>{
     inputFocus.current.focus()
-  })
+  },[])
   const handleSubmit =(e)=>{
     e.preventDefault()
     if(inputText.title.trim()){
-      props.addProductItemProps(inputText.title)
+      props.addProductProps(inputText.title)
       setInputText({title:""})
     }else{
       alert("Fill product field.")
@@ -29,6 +29,7 @@ const AddProduct =props=>{
     <form className="form-container" onSubmit={handleSubmit}>
       <input 
         className="input-text"
+        placeholder="Add product item ..."
         ref={inputFocus}
         onChange={handleChange} 
         name="title"
