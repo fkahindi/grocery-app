@@ -4,7 +4,7 @@ import AddButton from "./AddButton";
 const Header =({showForm, addInputForm})=>{
   
   return(
-    <>
+    <>      
       <h1
         style={{ 
           fontSize: "6rem",

@@ -1,12 +1,17 @@
 import React,{useState, useEffect} from "react";
-import Header from "./Header";
-import ProductList from "./ProductList";
+import { Route, Routes } from "react-router-dom";
 import {v4 as uuidv4} from 'uuid'
 
 import '../App.css' 
+import Header from "./Header";
+import ProductList from "./ProductList";
 import AddProduct from "./AddProduct";
+import Dashboard from "./admin/Dashboard";
+import Preferences from "./admin/Preferences";
+
 const App =()=>{
   const [products, setProducts] =useState(getInitialProducts())
+  const [showInputForm, setShowInputForm] =useState(false)
 
   function getInitialProducts(){
     //get stored items
@@ -32,9 +37,7 @@ const App =()=>{
   setProducts(
     [...products, newProduct]
   )
- }
-
- const [showInputForm, setShowInputForm] =useState(false)
+ } 
  
  const handleShowInputForm=()=>{
   setShowInputForm(!showInputForm)
@@ -59,20 +62,29 @@ const App =()=>{
       )
     )
  }
+ 
   return(
-    <div className="container">
-      <Header 
-        addInputForm={handleShowInputForm}
-        showForm ={showInputForm}
-      />
-      {showInputForm && <AddProduct addProductProps={addNewProduct}/>}
-      <ProductList 
-        className="product-list"
-        productProps={products}
-        handleUpVote={upVote}
-        handleDownVote={downVote}      
-      />
-    </div>
+    <>
+      <Routes>
+        <Route path="/" exact element={
+          <div className="container">
+          <Header 
+            addInputForm={handleShowInputForm}
+            showForm ={showInputForm}
+          />
+          {showInputForm && <AddProduct addProductProps={addNewProduct}/>}
+          <ProductList 
+            className="product-list"
+            productProps={products}
+            handleUpVote={upVote}
+            handleDownVote={downVote}      
+          />
+          </div>
+        } />        
+        <Route path="/dashboard" exact element={<div className="wrapper"><Dashboard /></div>} />
+        <Route path="/preferences" exact element={<div className="wrapper"><Preferences /></div>} />        
+      </Routes>
+    </>
   )
 }
 export default App
