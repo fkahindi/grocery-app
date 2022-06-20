@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 import PropTypes from "prop-types";
 
-import "./Login.css";
+import "./Auth.css";
 
 async function loginUser(credentials){
   return fetch('http://localhost:8080/login',{
@@ -27,9 +27,9 @@ export default function Login({setToken}){
     setToken(token)
   }
   return(
-    <div className="login-wrapper">
+    <div className="form-wrapper">
       <h1>Please Log in</h1>
-      <form className="" onSubmit={handleSubmit}>
+      <form className="form" onSubmit={handleSubmit}>
       <input 
         type="email" 
         name="email" 
@@ -42,7 +42,7 @@ export default function Login({setToken}){
         placeholder="Enter password..."
         onChange={e=>setPassword(e.target.value)}
       />
-      <button className="btn">Login</button>
+      <button className="auth-btn">Login</button>
     </form>
     </div>    
   )

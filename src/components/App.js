@@ -8,6 +8,7 @@ import ProductList from "./ProductList";
 import AddProduct from "./AddProduct";
 import Dashboard from "./admin/Dashboard";
 import Preferences from "./admin/Preferences";
+import Singnup from "./authentication/Signup";
 
 const App =()=>{
   const [products, setProducts] =useState(getInitialProducts())
@@ -83,6 +84,7 @@ const App =()=>{
         } />        
         <Route path="/dashboard" exact element={<div className="wrapper"><Dashboard /></div>} />
         <Route path="/preferences" exact element={<div className="wrapper"><Preferences /></div>} />        
+        <Route path="/signup" exact element={<div className="wrapper"><Singnup /></div>} />
       </Routes>
     </>
   )

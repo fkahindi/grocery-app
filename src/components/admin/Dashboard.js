@@ -1,6 +1,6 @@
 import React from "react";
 
-import Login from "../login/Login";
+import Login from "../authentication/Login";
 import useToken from "./useToken"
 
 export default function Dashboard(){
