@@ -3,14 +3,20 @@ import React,{useState} from 'react';
 import "./Auth.css";
 
 export default function Singnup(){
+
   const [inputText, setInputText] = useState({
     userName: "",
     email: "",
     password:"",
     confirmPassword: "",
   })
+
   const [submitted, setSubmitted] = useState(false)
   const [formError, setFormError] = useState(false)
+  const [nameError, setNameError] = useState("")
+  const [emailError, setEmailError] = useState("")
+  const [passwordError, setPasswordError] = useState("")
+  const [confirmPasswordError, setConfirmPasswordError] = useState("")
 
   const handleInputChange = e =>{
     setInputText({
@@ -20,24 +26,24 @@ export default function Singnup(){
     setSubmitted(false)
   }
   
-  const handleSubmit =e=>{
+  const handleSubmit = e =>{
     e.preventDefault()
-    let nameError, emailError, passwordError, confirmPasswordError =""
+    
     if(!inputText.userName.trim()){
       setFormError(true)
-      nameError = 'Username is required'
+      setNameError("Username is required")
     }
     if(!inputText.email.trim()){
       setFormError(true)
-      emailError = 'Email is requird'
+      setEmailError("Email is requird")
     }
     if(!inputText.password.trim()){
       setFormError(true)
-      passwordError = 'Password is requird'
+      setPasswordError("Password is requird")
     }
     if(!inputText.confirmPassword.trim()){
       setFormError(true)
-      confirmPasswordError = 'Confirm password'
+      setConfirmPasswordError("Confirm password")
     }
     if(!formError){
       setSubmitted(false)            
@@ -59,7 +65,7 @@ export default function Singnup(){
       <div
         className="success"
         style={{ 
-          display: submitted ? '' : 'none'
+          display: submitted ? "" : "none"
          }}
       >
          <h4>User successfully registered! </h4>
@@ -72,10 +78,10 @@ export default function Singnup(){
       <div
         className="error"
         style={{ 
-          display: formError? '': 'none'
+          display: formError? "": "none"
          }}
       >
-        <h6>Fix form errors!</h6>
+        <h4>Fix form errors!</h4>
       </div>
     )
   }
@@ -95,6 +101,8 @@ export default function Singnup(){
           placeholder="Username here..."
           onChange={handleInputChange}
         />
+        <div className="error">{nameError===""? "": nameError}</div> 
+
         <label htmlFor="email" className="form-lbl">Email:</label>     
         <input 
           type="email"
@@ -103,6 +111,8 @@ export default function Singnup(){
           placeholder="Type email..."
           onChange={handleInputChange}
         />
+        <div className="error">{emailError ===""? "": emailError}</div>
+
         <label htmlFor="password" className="form-lbl">Password:</label>
         <input 
           type="password"
@@ -111,6 +121,8 @@ export default function Singnup(){
           placeholder="Type password..."
           onChange={handleInputChange}
         />
+        <div className="error">{passwordError===""? "": passwordError}</div>
+        
         <label htmlFor="confirmPassword" className="form-lbl">Confirm Password:</label>
         <input 
           type="password"
@@ -119,7 +131,9 @@ export default function Singnup(){
           placeholder="Confirm password..."
           onChange={handleInputChange}
         />
-        <button className="auth-btn">Signup</button>
+        <div className="error">{confirmPasswordError===""? "": confirmPasswordError}</div>
+        
+        <button className="submit-btn">Signup</button>
       </form>
     </div>    
   )
