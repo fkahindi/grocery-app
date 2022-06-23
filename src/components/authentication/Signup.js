@@ -101,7 +101,7 @@ export default function Singnup(){
           placeholder="Username here..."
           onChange={handleInputChange}
         />
-        <div className="error">{nameError===""? "": nameError}</div> 
+        <div className="error">{nameError? nameError:"" }</div> 
 
         <label htmlFor="email" className="form-lbl">Email:</label>     
         <input 
@@ -111,7 +111,7 @@ export default function Singnup(){
           placeholder="Type email..."
           onChange={handleInputChange}
         />
-        <div className="error">{emailError ===""? "": emailError}</div>
+        <div className="error">{emailError? emailError:"" }</div>
 
         <label htmlFor="password" className="form-lbl">Password:</label>
         <input 
@@ -121,7 +121,7 @@ export default function Singnup(){
           placeholder="Type password..."
           onChange={handleInputChange}
         />
-        <div className="error">{passwordError===""? "": passwordError}</div>
+        <div className="error">{passwordError? passwordError :"" }</div>
         
         <label htmlFor="confirmPassword" className="form-lbl">Confirm Password:</label>
         <input 
@@ -131,7 +131,7 @@ export default function Singnup(){
           placeholder="Confirm password..."
           onChange={handleInputChange}
         />
-        <div className="error">{confirmPasswordError===""? "": confirmPasswordError}</div>
+        <div className="error">{confirmPasswordError? confirmPasswordError:""}</div>
         
         <button className="submit-btn">Signup</button>
       </form>
