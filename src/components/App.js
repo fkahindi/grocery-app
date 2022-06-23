@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from "react";
+import React,{useState, useEffect, createContext} from "react";
 import { Route, Routes } from "react-router-dom";
 import {v4 as uuidv4} from 'uuid'
 
@@ -10,7 +10,11 @@ import Dashboard from "./admin/Dashboard";
 import Preferences from "./admin/Preferences";
 import Singnup from "./authentication/Signup";
 
+export const UserContext = createContext("")
+
 const App =()=>{
+
+  const user = "Francis"
   const [products, setProducts] =useState(getInitialProducts())
   const [showInputForm, setShowInputForm] =useState(false)
 
@@ -69,10 +73,12 @@ const App =()=>{
       <Routes>
         <Route path="/" exact element={
           <div className="container">
-          <Header 
-            addInputForm={handleShowInputForm}
-            showForm ={showInputForm}
-          />
+            <UserContext.Provider value={user}>
+              <Header 
+                addInputForm={handleShowInputForm}
+                showForm ={showInputForm}
+              />
+            </UserContext.Provider>          
           {showInputForm && <AddProduct addProductProps={addNewProduct}/>}
           <ProductList 
             className="product-list"

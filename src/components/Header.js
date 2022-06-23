@@ -1,10 +1,12 @@
 import React from "react";
 import AddButton from "./AddButton";
+import UserInfo from "./UserInfo";
 
 const Header =({showForm, addInputForm})=>{
   
   return(
-    <>      
+    <>   
+      <UserInfo />   
       <h1
         style={{ 
           fontSize: "6rem",

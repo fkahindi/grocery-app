@@ -1,6 +1,6 @@
 import React, {useState,useEffect,useRef} from "react";
 
-const AddProduct =props=>{
+const AddProduct =({addProductProps})=>{
 
   const [inputText, setInputText] =useState({
     title:"",
@@ -13,7 +13,7 @@ const AddProduct =props=>{
   const handleSubmit =(e)=>{
     e.preventDefault()
     if(inputText.title.trim()){
-      props.addProductProps(inputText.title)
+      addProductProps(inputText.title)
       setInputText({title:""})
     }else{
       alert("Fill product field.")
