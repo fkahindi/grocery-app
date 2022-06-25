@@ -1,0 +1,107 @@
+[33mcommit f88986f8ace27533ac5f49504cc1105a02a71180[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Francis <fkahindi@gmail.com>
+Date:   Thu Jun 23 16:43:28 2022 +0300
+
+    createContext for user information
+
+[1mdiff --git a/src/components/AddProduct.js b/src/components/AddProduct.js[m
+[1mindex b3d3294..e882d01 100644[m
+[1m--- a/src/components/AddProduct.js[m
+[1m+++ b/src/components/AddProduct.js[m
+[36m@@ -1,6 +1,6 @@[m
+ import React, {useState,useEffect,useRef} from "react";[m
+ [m
+[31m-const AddProduct =props=>{[m
+[32m+[m[32mconst AddProduct =({addProductProps})=>{[m
+ [m
+   const [inputText, setInputText] =useState({[m
+     title:"",[m
+[36m@@ -13,7 +13,7 @@[m [mconst AddProduct =props=>{[m
+   const handleSubmit =(e)=>{[m
+     e.preventDefault()[m
+     if(inputText.title.trim()){[m
+[31m-      props.addProductProps(inputText.title)[m
+[32m+[m[32m      addProductProps(inputText.title)[m
+       setInputText({title:""})[m
+     }else{[m
+       alert("Fill product field.")[m
+[1mdiff --git a/src/components/App.js b/src/components/App.js[m
+[1mindex 78a6c8e..4035261 100644[m
+[1m--- a/src/components/App.js[m
+[1m+++ b/src/components/App.js[m
+[36m@@ -1,4 +1,4 @@[m
+[31m-import React,{useState, useEffect} from "react";[m
+[32m+[m[32mimport React,{useState, useEffect, createContext} from "react";[m
+ import { Route, Routes } from "react-router-dom";[m
+ import {v4 as uuidv4} from 'uuid'[m
+ [m
+[36m@@ -10,7 +10,11 @@[m [mimport Dashboard from "./admin/Dashboard";[m
+ import Preferences from "./admin/Preferences";[m
+ import Singnup from "./authentication/Signup";[m
+ [m
+[32m+[m[32mexport const UserContext = createContext("")[m
+[32m+[m
+ const App =()=>{[m
+[32m+[m
+[32m+[m[32m  const user = "Francis"[m
+   const [products, setProducts] =useState(getInitialProducts())[m
+   const [showInputForm, setShowInputForm] =useState(false)[m
+ [m
+[36m@@ -69,10 +73,12 @@[m [mconst App =()=>{[m
+       <Routes>[m
+         <Route path="/" exact element={[m
+           <div className="container">[m
+[31m-          <Header [m
+[31m-            addInputForm={handleShowInputForm}[m
+[31m-            showForm ={showInputForm}[m
+[31m-          />[m
+[32m+[m[32m            <UserContext.Provider value={user}>[m
+[32m+[m[32m              <Header[m[41m [m
+[32m+[m[32m                addInputForm={handleShowInputForm}[m
+[32m+[m[32m                showForm ={showInputForm}[m
+[32m+[m[32m              />[m
+[32m+[m[32m            </UserContext.Provider>[m[41m          [m
+           {showInputForm && <AddProduct addProductProps={addNewProduct}/>}[m
+           <ProductList [m
+             className="product-list"[m
+[1mdiff --git a/src/components/Header.js b/src/components/Header.js[m
+[1mindex 66a7426..82a52f6 100644[m
+[1m--- a/src/components/Header.js[m
+[1m+++ b/src/components/Header.js[m
+[36m@@ -1,10 +1,12 @@[m
+ import React from "react";[m
+ import AddButton from "./AddButton";[m
+[32m+[m[32mimport UserInfo from "./UserInfo";[m
+ [m
+ const Header =({showForm, addInputForm})=>{[m
+   [m
+   return([m
+[31m-    <>      [m
+[32m+[m[32m    <>[m[41m   [m
+[32m+[m[32m      <UserInfo />[m[41m   [m
+       <h1[m
+         style={{ [m
+           fontSize: "6rem",[m
+[1mdiff --git a/src/components/UserInfo.js b/src/components/UserInfo.js[m
+[1mnew file mode 100644[m
+[1mindex 0000000..cff4103[m
+[1m--- /dev/null[m
+[1m+++ b/src/components/UserInfo.js[m
+[36m@@ -0,0 +1,16 @@[m
+[32m+[m[32mimport React,{useContext} from 'react'[m
+[32m+[m[32mimport { UserContext } from './App'[m
+[32m+[m
+[32m+[m
+[32m+[m[32mfunction UserInfo(){[m
+[32m+[m[32m  /* return([m
+[32m+[m[32m    <UserContext.Consumer>[m
+[32m+[m[32m      {user =><span>User: {user}</span> }[m
+[32m+[m[32m    </UserContext.Consumer>[m
+[32m+[m[32m  ) */[m
+[32m+[m[41m  [m
+[32m+[m[32m  const user = useContext(UserContext)[m
+[32m+[m[32m  return <span>User: {user}</span>[m
+[32m+[m[41m  [m
+[32m+[m[32m}[m
+[32m+[m[32mexport default UserInfo[m
+\ No newline at end of file[m
