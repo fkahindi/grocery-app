@@ -16,8 +16,9 @@ const ProductList =props=>{
           <tbody>  
                 {props.productProps.map(product =>(
                   <Product 
-                    className="product-item"
+                    //className="product-item"
                     key={product.id}
+                    color={product.votes<1 ? "red":"black"}
                     product={product}
                     handleUpVote={props.handleUpVote}
                     handleDownVote={props.handleDownVote}

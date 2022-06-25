@@ -1,5 +1,4 @@
 import React from "react";
-import AddButton from "./AddButton";
 import UserInfo from "./UserInfo";
 
 const Header =({showForm, addInputForm})=>{
@@ -20,11 +19,7 @@ const Header =({showForm, addInputForm})=>{
       >
         Groceries
       </h1>
-      <AddButton 
-        text ={showForm ? "Hide Form":"Add Product"}
-        background ={showForm? "red":"teal"}  
-        showInputForm={addInputForm}
-      />
+      
     </>
   )
 }
