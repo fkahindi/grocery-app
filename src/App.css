@@ -102,3 +102,7 @@ tr:nth-of-type(odd) {
     color: white;
     cursor: pointer;
 }
+
+.danger {
+    color: red;
+}

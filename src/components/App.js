@@ -7,6 +7,7 @@ import ProductList from "./ProductList";
 import Dashboard from "./admin/Dashboard";
 import Preferences from "./admin/Preferences";
 import Singnup from "./authentication/Signup";
+import EditProduct from "./admin/EditProduct";
 
 export const UserContext = createContext("")
 
@@ -77,6 +78,7 @@ const App =()=>{
           </div>
         } />        
         <Route path="/dashboard" exact element={<div className="wrapper"><Dashboard /></div>} />
+        <Route path="/edit" exact element={<div className="wrapper"><EditProduct /></div>}/>
         <Route path="/preferences" exact element={<div className="wrapper"><Preferences /></div>} />        
         <Route path="/signup" exact element={<div className="wrapper"><Singnup /></div>} />
       </Routes>

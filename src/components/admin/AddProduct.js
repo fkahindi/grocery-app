@@ -1,60 +1,29 @@
-import React, {useState,useEffect,useRef} from "react";
+import React from "react";
+import axios from "axios";
+import {useNavigate} from 'react-router-dom';
 
-const AddProduct =({addProductProps})=>{
+import ProductForm from "./ProductForm";
 
-  const [inputText, setInputText] =useState({
-    title:"",
-  })
+const AddProduct =()=>{ 
 
-  const inputFocus = useRef(inputText)
-  useEffect(()=>{
-    inputFocus.current.focus()
-  },[])
-  const handleSubmit =(e)=>{
-    e.preventDefault()
-    if(inputText.title.trim()){
-      addProductProps(inputText.title)
-      setInputText({title:""})
-    }else{
-      alert("Fill product field.")
-    }
- }
- const handleChange =e=>{
-    setInputText({
-      ...inputText,
-      [e.target.name] : e.target.value
+  const navigate = useNavigate()  
+
+  const saveProduct = async (title, price)=>{
+    await axios.post('http://localhost:5000/products',{
+      title:title,
+      price:price,
+      created_at:new Date()
     })
+    navigate('/dashboard')
   }
+ 
+ 
   return(
-    <form className="form-container" onSubmit={handleSubmit}>
-      <input 
-        className="input-text"
-        placeholder="Add product item ..."
-        ref={inputFocus}
-        onChange={handleChange} 
-        name="title"
-        value={inputText.title}
+    <>
+      <ProductForm 
+        handleSubmit={saveProduct}
       />
-      <input 
-        className="input-text"
-        placeholder="Add price..."
-        onChange={handleChange} 
-        name="price"
-        value={inputText.price}
-      />
-      <button 
-        style={{ 
-          backgroundColor:"darkcyan", 
-          color:"white", 
-          border:"none",
-          borderRadius:"calc(0.5*40px)",
-          padding:"10px", 
-          cursor:"pointer" 
-         }}
-      >
-        Add
-      </button>
-    </form>
+    </>    
   )
 }
 export default AddProduct

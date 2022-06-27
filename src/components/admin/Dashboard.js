@@ -3,6 +3,7 @@ import axios from "axios";
 
 //import Login from "../authentication/Login";
 //import useToken from "./useToken"
+
 import ProductList from "./ProductList";
 import Header from "./Header";
 import AddProduct from "./AddProduct";
@@ -17,7 +18,7 @@ export default function Dashboard(){
     return <Login setToken={setToken}/>
   } */
   const [admin, setAdmin] = useState("Admin")
-  const [products, setProducts] = useState([])
+  const [products, setProduct] = useState([])
   const[showInputForm, setShowInputForm]= useState(false)
 
   useEffect(()=>{
@@ -26,15 +27,16 @@ export default function Dashboard(){
 
   const getProducts = async ()=>{
     const response = await axios.get('http://localhost:5000/products')
-    setProducts(response.data)
+    setProduct(response.data)
   }
 
   const deleteProduct = async (id)=>{
-    await axios.delete(`http://localhost:5000/$(id)`)
+    await axios.delete(`http://localhost:5000/${id}`)
     getProducts()
   }
 
-  const addNewProduct =title=>{
+  
+  /* const addNewProduct =title=>{
    const newProduct ={
      title:title,
      price:(Math.random()*(1-0)+0).toFixed(2),
@@ -43,7 +45,7 @@ export default function Dashboard(){
   setProducts(
     [...products, newProduct]
   )
- } 
+ } */ 
 
   const handleShowInputForm=()=>{
     setShowInputForm(!showInputForm)
@@ -56,11 +58,11 @@ export default function Dashboard(){
           showForm ={showInputForm}
        />
       </AdminContext.Provider>  
-      {showInputForm && <AddProduct addProductProps={addNewProduct} />}    
-      {<ProductList 
+      {showInputForm && <AddProduct />}    
+      <ProductList 
         products ={products}
         deleteProduct={deleteProduct}
-      />}
+      />
     </>
   )
 }
