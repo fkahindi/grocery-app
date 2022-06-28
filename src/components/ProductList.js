@@ -6,6 +6,7 @@ const ProductList =props=>{
     <table> 
         <thead>
           <tr>
+            <th>No.</th>
             <th>Product Name</th>
             <th>Price</th>
             <th>Votes Count</th>
@@ -14,9 +15,10 @@ const ProductList =props=>{
           </tr>
         </thead>
           <tbody>  
-                {props.productProps.map(product =>(
+                {props.productProps.map((product, index) =>(
                   <Product 
                     //className="product-item"
+                    index= {index + 1}
                     key={product.id}
                     color={product.votes<1 ? "red":"black"}
                     product={product}

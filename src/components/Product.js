@@ -1,9 +1,10 @@
 import React from "react";
 
 const Product = props =>{
-  const {id, title,price, votes,color} = props.product
+  const {index, id, title,price, votes,color} = props.product
   return(
     <tr>
+      <td><span>{index}</span></td>
       <td><span className="product-title">{title}</span>{" "}</td>
       <td><span className="product-price">${price}</span>{" "}</td>
       <td><span style={{ color:color }}>{votes}</span></td>

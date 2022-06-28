@@ -1,5 +1,6 @@
 import React,{useState, useEffect, createContext} from "react";
 import { Route, Routes } from "react-router-dom";
+import axios from "axios";
 
 import '../App.css' 
 import Header from "./Header";
@@ -15,7 +16,7 @@ const App =()=>{
 
   //const user = "Francis"
   const [user, setUser] =useState("Guest")
-  const [products, setProducts] =useState(getInitialProducts())
+  const [products, setProducts] =useState([])
 
   
   /* useEffect(()=>{
@@ -24,40 +25,36 @@ const App =()=>{
     .then(user=>setUser(user))
   },[user]) */
 
+  useEffect(()=>{
+    getProducts()
+  },[])
 
-  function getInitialProducts(){
-    //get stored items
-    const temp = localStorage.getItem("products")
-    const savedProducts = JSON.parse(temp)
-    return savedProducts || []
+  const getProducts = async ()=>{
+    //retrive products from server
+    
+     const res = await axios.get('http://localhost:5000/products')
+     setProducts(res.data)
   }
 
-  useEffect(()=>{
-    //storing products    
-    const temp = JSON.stringify(products)
-    localStorage.setItem("products",temp)
-
-  },[products])
-
-
+  
  const upVote =(id)=>{
-   setProducts(
+   /* setProducts(
      products.map(product=>
        product.id === id
        ? {...product, votes: product.votes+1}
        : product
       )
-   )
+   ) */
  }
 
  const downVote=(id)=>{
-  setProducts(
+  /* setProducts(
      products.map(product=>
       product.id === id
        ? {...product, votes: product.votes-1}
        : product
       )
-    )
+    ) */
  }
  
   return(
@@ -78,7 +75,6 @@ const App =()=>{
           </div>
         } />        
         <Route path="/dashboard" exact element={<div className="wrapper"><Dashboard /></div>} />
-        <Route path="/edit" exact element={<div className="wrapper"><EditProduct /></div>}/>
         <Route path="/preferences" exact element={<div className="wrapper"><Preferences /></div>} />        
         <Route path="/signup" exact element={<div className="wrapper"><Singnup /></div>} />
       </Routes>

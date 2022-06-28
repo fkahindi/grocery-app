@@ -5,8 +5,7 @@ import { Link } from 'react-router-dom';
 const ProductList =(props)=>{
  
   return(
-    <>
-      <Link to="/add" className="button">Add New</Link>            
+    <>           
       <table>
         <thead>
           <tr>
@@ -17,7 +16,7 @@ const ProductList =(props)=>{
           </tr>          
         </thead>
         <tbody>          
-          {/* {props.products.map((product, index)=>(
+          {props.products.map((product, index)=>(
             <tr key={product.id}>
               <td>{index+1}</td>
               <td>{product.title}</td>
@@ -27,7 +26,7 @@ const ProductList =(props)=>{
                 <button onClick={()=>props.deleteProduct(product.id)} className="button">Delete</button>
               </td>
             </tr>
-          ))} */}
+          ))}
         </tbody>
       </table>
     </>

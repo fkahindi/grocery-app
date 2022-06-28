@@ -15,7 +15,7 @@ const EditProduct = ()=>{
   await axios.patch(`http://localhost:5000/products/${id}`,{
     title:title,
     price:price,
-    updated_at: new Date()
+    updatedAt: new Date()
   })
   navigate('/dashboard')
  }

@@ -1,4 +1,5 @@
 import React,{useState, useEffect,createContext} from "react";
+import {Routes, Route} from "react-router-dom"
 import axios from "axios";
 
 //import Login from "../authentication/Login";
@@ -7,6 +8,7 @@ import axios from "axios";
 import ProductList from "./ProductList";
 import Header from "./Header";
 import AddProduct from "./AddProduct";
+import EditProduct from "./EditProduct";
 
 export const AdminContext = createContext("")
 
@@ -35,18 +37,6 @@ export default function Dashboard(){
     getProducts()
   }
 
-  
-  /* const addNewProduct =title=>{
-   const newProduct ={
-     title:title,
-     price:(Math.random()*(1-0)+0).toFixed(2),
-     votes:0,
-   }
-  setProducts(
-    [...products, newProduct]
-  )
- } */ 
-
   const handleShowInputForm=()=>{
     setShowInputForm(!showInputForm)
   }
@@ -63,6 +53,10 @@ export default function Dashboard(){
         products ={products}
         deleteProduct={deleteProduct}
       />
+      <Routes>
+        <Route path="/edit" exact element={<div className="wrapper"><EditProduct /></div>}/>
+      </Routes>
+
     </>
   )
 }
