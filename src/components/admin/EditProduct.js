@@ -24,7 +24,7 @@ const EditProduct = ()=>{
    getProductById()
  },[])
 
- const getProductById = async ()=>{
+ const getProductById = async (id)=>{
     const res = await axios.get(`http://localhost:5000/products/${id}`)
 
      setTitle(res.data.title)
@@ -34,6 +34,7 @@ const EditProduct = ()=>{
  return(
   <ProductForm 
     handleSubmit={updateProduct}
+    buttonText={"Update"}
   />
  )
 }

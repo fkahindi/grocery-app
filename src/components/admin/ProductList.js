@@ -12,7 +12,7 @@ const ProductList =(props)=>{
             <th>No.</th>
             <th>Name</th>
             <th>Price</th>
-            <th>Actions</th>
+            <th colSpan={2}>Actions</th>
           </tr>          
         </thead>
         <tbody>          
@@ -21,8 +21,10 @@ const ProductList =(props)=>{
               <td>{index+1}</td>
               <td>{product.title}</td>
               <td>{product.price}</td>
+              <td>          
+                <Link to={`/edit/${product.id}`} className="btn">Edit</Link>                
+              </td>
               <td>
-                <Link to={`/edit/${product.id}`} className="button">Edit</Link>
                 <button onClick={()=>props.deleteProduct(product.id)} className="button">Delete</button>
               </td>
             </tr>

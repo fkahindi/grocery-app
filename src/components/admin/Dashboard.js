@@ -1,5 +1,6 @@
 import React,{useState, useEffect,createContext} from "react";
-import {Routes, Route} from "react-router-dom"
+//import {Routes, Route} from "react-router-dom"
+import {useNavigate} from 'react-router-dom';
 import axios from "axios";
 
 //import Login from "../authentication/Login";
@@ -8,7 +9,7 @@ import axios from "axios";
 import ProductList from "./ProductList";
 import Header from "./Header";
 import AddProduct from "./AddProduct";
-import EditProduct from "./EditProduct";
+
 
 export const AdminContext = createContext("")
 
@@ -19,12 +20,19 @@ export default function Dashboard(){
   if(!token){
     return <Login setToken={setToken}/>
   } */
+  const navigate = useNavigate()
   const [admin, setAdmin] = useState("Admin")
   const [products, setProduct] = useState([])
   const[showInputForm, setShowInputForm]= useState(false)
 
   useEffect(()=>{
     getProducts()
+
+    const interval = setInterval(()=>{
+      getProducts()
+    },10000)
+     
+    return ()=>clearInterval(interval)
   },[])
 
   const getProducts = async ()=>{
@@ -37,6 +45,14 @@ export default function Dashboard(){
     getProducts()
   }
 
+  const saveProduct = (title, price)=>{
+     axios.post('http://localhost:5000/products',{
+        title,
+        price      
+      })
+      .then(navigate('/dashboard'))
+  }
+
   const handleShowInputForm=()=>{
     setShowInputForm(!showInputForm)
   }
@@ -47,16 +63,17 @@ export default function Dashboard(){
          addInputForm={handleShowInputForm}
           showForm ={showInputForm}
        />
-      </AdminContext.Provider>  
-      {showInputForm && <AddProduct />}    
-      <ProductList 
-        products ={products}
-        deleteProduct={deleteProduct}
-      />
-      <Routes>
-        <Route path="/edit" exact element={<div className="wrapper"><EditProduct /></div>}/>
-      </Routes>
-
+      </AdminContext.Provider> 
+      <div>
+        {showInputForm && <AddProduct saveProduct={saveProduct} />} 
+      </div>        
+      <div className="container">  
+        <ProductList 
+          className="product-list"
+          products ={products}
+          deleteProduct={deleteProduct}
+        />        
+      </div>      
     </>
   )
 }

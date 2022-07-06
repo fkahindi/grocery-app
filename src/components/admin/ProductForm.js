@@ -53,7 +53,7 @@ const ProductForm = (props)=>{
           cursor:"pointer" 
          }}
       >
-        Add
+        {props.buttonText}
       </button>
     </form>
   )
