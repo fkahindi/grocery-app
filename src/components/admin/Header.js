@@ -1,14 +1,16 @@
 import React from "react";
 import AddButton from "./AddButton";
 import UserInfo from "./UserInfo";
+import NavBar from "../NavBar";
 
 const Header =({showForm, addInputForm})=>{
-  
+
   return(
-    <>   
-      <UserInfo />   
+    <>
+      <UserInfo />
+      <NavBar />
       <h1
-        style={{ 
+        style={{
           fontSize: "6rem",
           fontWeight: "600",
           marginBottom: "2rem",
@@ -20,9 +22,9 @@ const Header =({showForm, addInputForm})=>{
       >
         Groceries
       </h1>
-      <AddButton 
+      <AddButton
         text ={showForm ? "Hide Form":"Add Product"}
-        background ={showForm? "red":"teal"}  
+        background ={showForm? "red":"teal"}
         showInputForm={addInputForm}
       />
     </>

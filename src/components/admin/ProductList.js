@@ -1,11 +1,10 @@
 import React from 'react';
-
 import { Link } from 'react-router-dom';
 
 const ProductList =(props)=>{
- 
+
   return(
-    <>           
+    <>
       <table>
         <thead>
           <tr>
@@ -13,16 +12,16 @@ const ProductList =(props)=>{
             <th>Name</th>
             <th>Price</th>
             <th colSpan={2}>Actions</th>
-          </tr>          
+          </tr>
         </thead>
-        <tbody>          
+        <tbody>
           {props.products.map((product, index)=>(
             <tr key={product.id}>
               <td>{index+1}</td>
               <td>{product.title}</td>
               <td>{product.price}</td>
-              <td>          
-                <Link to={`/edit/${product.id}`} className="btn">Edit</Link>                
+              <td>
+                <Link to={`/edit/${product.id}`} className="button">Edit</Link>
               </td>
               <td>
                 <button onClick={()=>props.deleteProduct(product.id)} className="button">Delete</button>

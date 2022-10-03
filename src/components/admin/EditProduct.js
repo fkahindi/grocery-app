@@ -1,17 +1,15 @@
-import React,{useState,useEffect, useRef}from 'react';
+import React,{useEffect}from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import ProductForm from './ProductForm';
 
-const EditProduct = ()=>{
- 
-  const [title, setTitle] = useState()
-  const [price, setPrice] = useState()
+const EditProduct = (props)=>{
+
   const navigate = useNavigate()
   const {id} = useParams()
 
-  const updateProduct =async (title, price)=>{
+  const updateProduct =async (title, price)=>{//OK
   await axios.patch(`http://localhost:5000/products/${id}`,{
     title:title,
     price:price,
@@ -21,18 +19,19 @@ const EditProduct = ()=>{
  }
 
  useEffect(()=>{
-   getProductById()
- },[])
+  getProductById(id)
+ },[id])
 
  const getProductById = async (id)=>{
-    const res = await axios.get(`http://localhost:5000/products/${id}`)
+  const res = await axios.get(`http://localhost:5000/products/${id}`)
+  console.log(res.data.title, res.data.price)
 
-     setTitle(res.data.title)
-     setPrice(res.data.price)
-   
+  //update form fields with record from database
+  //
  }
+
  return(
-  <ProductForm 
+  <ProductForm
     handleSubmit={updateProduct}
     buttonText={"Update"}
   />

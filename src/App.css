@@ -49,6 +49,7 @@ td,
 th {
     padding: 0.35em 0.25em;
     text-align: center;
+    color: black;
 }
 
 td:nth-of-type(1),
@@ -80,11 +81,12 @@ tr:nth-of-type(odd) {
 .btn {
     width: 30px;
     margin: 0 10px;
+    padding: 3px 10px;
     font-size: 1em;
     font-family: serif;
     border: none;
-    color: white;
-    background-color: darkslategray;
+    color: wheat;
+    background-color: rgb(37, 65, 65);
 }
 
 .btn:hover {

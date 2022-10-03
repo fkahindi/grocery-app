@@ -1,13 +1,15 @@
 import React from "react";
 import UserInfo from "./UserInfo";
+import Nav from "./NavBar";
 
 const Header =({showForm, addInputForm})=>{
-  
+
   return(
-    <>   
-      <UserInfo />   
+    <>
+      <UserInfo />
+      <Nav />
       <h1
-        style={{ 
+        style={{
           fontSize: "6rem",
           fontWeight: "600",
           marginBottom: "2rem",
@@ -19,7 +21,7 @@ const Header =({showForm, addInputForm})=>{
       >
         Groceries
       </h1>
-      
+
     </>
   )
 }

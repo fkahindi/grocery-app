@@ -2,7 +2,7 @@ import React,{useState, useEffect, createContext} from "react";
 import { Route, Routes } from "react-router-dom";
 import axios from "axios";
 
-import '../App.css' 
+import '../App.css'
 import Header from "./Header";
 import ProductList from "./ProductList";
 import Dashboard from "./admin/Dashboard";
@@ -17,8 +17,10 @@ const App =()=>{
   //const user = "Francis"
   const [user, setUser] =useState("Guest")
   const [products, setProducts] =useState([])
+  const [upvote, setUpvote] = useState(0)
+  const [downvote, setDownvote] = useState(0)
 
-  
+
   /* useEffect(()=>{
     fetch('localhost:8080/login')
     .then(res=>res.json)
@@ -31,32 +33,32 @@ const App =()=>{
 
   const getProducts = async ()=>{
     //retrive products from server
-    
+
      const res = await axios.get('http://localhost:5000/products')
      setProducts(res.data)
   }
 
-  
- const upVote =(id)=>{
-   /* setProducts(
-     products.map(product=>
-       product.id === id
-       ? {...product, votes: product.votes+1}
-       : product
-      )
-   ) */
+
+ const upVote = async(id)=>{
+
+    const res = await axios.patch(`http://localhost:5000/products/${id}`,{
+      upVote: upvote + 1
+    })
+
+
+   setUpvote(res.data.upVote)
+   console.log(res.data.upVote)
  }
 
- const downVote=(id)=>{
-  /* setProducts(
-     products.map(product=>
-      product.id === id
-       ? {...product, votes: product.votes-1}
-       : product
-      )
-    ) */
+ const downVote= async(id)=>{
+  const res = await axios.patch(`http://localhost:5000/products/${id}`,{
+      downVote: downvote - 1
+    })
+
+   setDownvote(res.data.downVote)
+   console.log(res.data.upVote)
  }
- 
+
   return(
     <>
       <Routes>
@@ -64,18 +66,19 @@ const App =()=>{
           <div className="container">
             <UserContext.Provider value={user}>
               <Header   />
-            </UserContext.Provider>    
-          
-          <ProductList 
+            </UserContext.Provider>
+
+          <ProductList
             className="product-list"
             productProps={products}
             handleUpVote={upVote}
-            handleDownVote={downVote}      
+            handleDownVote={downVote}
           />
           </div>
-        } />        
-        <Route path="/dashboard" exact element={<div className="wrapper"><Dashboard /></div>} />
-        <Route path="/preferences" exact element={<div className="wrapper"><Preferences /></div>} />        
+        } />
+        <Route path="/dashboard/*" exact element={<div className="wrapper"><Dashboard /></div>} />
+        <Route path="/edit/:id" exact element={<div className="wrapper"><EditProduct /></div>}/>
+        <Route path="/preferences" exact element={<div className="wrapper"><Preferences /></div>} />
         <Route path="/signup" exact element={<div className="wrapper"><Singnup /></div>} />
       </Routes>
     </>

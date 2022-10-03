@@ -1,5 +1,4 @@
 import React,{useState, useEffect,createContext} from "react";
-//import {Routes, Route} from "react-router-dom"
 import {useNavigate} from 'react-router-dom';
 import axios from "axios";
 
@@ -9,7 +8,6 @@ import axios from "axios";
 import ProductList from "./ProductList";
 import Header from "./Header";
 import AddProduct from "./AddProduct";
-
 
 export const AdminContext = createContext("")
 
@@ -31,24 +29,24 @@ export default function Dashboard(){
     const interval = setInterval(()=>{
       getProducts()
     },10000)
-     
+
     return ()=>clearInterval(interval)
   },[])
 
-  const getProducts = async ()=>{
+  const getProducts = async ()=>{//OK
     const response = await axios.get('http://localhost:5000/products')
     setProduct(response.data)
   }
 
-  const deleteProduct = async (id)=>{
-    await axios.delete(`http://localhost:5000/${id}`)
+  const deleteProduct = async (id)=>{//OK
+    await axios.delete(`http://localhost:5000/products/${id}`)
     getProducts()
   }
 
-  const saveProduct = (title, price)=>{
+  const saveProduct = (title, price)=>{//OK
      axios.post('http://localhost:5000/products',{
         title,
-        price      
+        price
       })
       .then(navigate('/dashboard'))
   }
@@ -56,6 +54,7 @@ export default function Dashboard(){
   const handleShowInputForm=()=>{
     setShowInputForm(!showInputForm)
   }
+
   return(
     <>
       <AdminContext.Provider value={admin}>
@@ -63,17 +62,19 @@ export default function Dashboard(){
          addInputForm={handleShowInputForm}
           showForm ={showInputForm}
        />
-      </AdminContext.Provider> 
+      </AdminContext.Provider>
       <div>
-        {showInputForm && <AddProduct saveProduct={saveProduct} />} 
-      </div>        
-      <div className="container">  
-        <ProductList 
+        {showInputForm && <AddProduct saveProduct={saveProduct} />}
+      </div>
+
+      <div className="container">
+        <ProductList
           className="product-list"
           products ={products}
           deleteProduct={deleteProduct}
-        />        
-      </div>      
+        />
+
+      </div>
     </>
   )
 }
