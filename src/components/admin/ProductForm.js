@@ -28,29 +28,31 @@ const ProductForm = (props)=>{
   }
   return(
     <form className="form-container" onSubmit={checkForm}>
-      <input 
+      <h3 className="form-heading">{props.formHeading}</h3>
+      <input
         className="input-text"
         placeholder="Add product item ..."
         ref={inputFocus}
-        onChange={handleChange} 
+        onChange={handleChange}
         name="title"
         value={inputText.title}
       />
-      <input 
+      <input
         className="input-text"
         placeholder="Add price..."
-        onChange={handleChange} 
+        onChange={handleChange}
         name="price"
         value={inputText.price}
       />
-      <button 
-        style={{ 
-          backgroundColor:"darkcyan", 
-          color:"white", 
+
+      <button
+        style={{
+          backgroundColor:"darkcyan",
+          color:"white",
           border:"none",
           borderRadius:"calc(0.5*40px)",
-          padding:"10px", 
-          cursor:"pointer" 
+          padding:"10px",
+          cursor:"pointer"
          }}
       >
         {props.buttonText}

@@ -29,13 +29,19 @@ const App =()=>{
 
   useEffect(()=>{
     getProducts()
+
+    const interval = setInterval(()=>{
+      getProducts()
+    },10000)
+
+    return ()=>clearInterval(interval)
   },[])
 
   const getProducts = async ()=>{
     //retrive products from server
 
      const res = await axios.get('http://localhost:5000/products')
-     setProducts(res.data)
+     setProducts(res.data.sort((a,b)=>a.title > b.title ? 1 : -1))
   }
 
 

@@ -1,5 +1,4 @@
 import React,{useState, useEffect,createContext} from "react";
-import {useNavigate} from 'react-router-dom';
 import axios from "axios";
 
 //import Login from "../authentication/Login";
@@ -18,24 +17,19 @@ export default function Dashboard(){
   if(!token){
     return <Login setToken={setToken}/>
   } */
-  const navigate = useNavigate()
+
   const [admin, setAdmin] = useState("Admin")
-  const [products, setProduct] = useState([])
+  const [products, setProducts] = useState([])
   const[showInputForm, setShowInputForm]= useState(false)
 
   useEffect(()=>{
     getProducts()
 
-    const interval = setInterval(()=>{
-      getProducts()
-    },10000)
-
-    return ()=>clearInterval(interval)
   },[])
 
   const getProducts = async ()=>{//OK
     const response = await axios.get('http://localhost:5000/products')
-    setProduct(response.data)
+    setProducts(response.data.sort((a,b)=>a.title > b.title ? 1:-1))
   }
 
   const deleteProduct = async (id)=>{//OK
@@ -43,12 +37,12 @@ export default function Dashboard(){
     getProducts()
   }
 
-  const saveProduct = (title, price)=>{//OK
-     axios.post('http://localhost:5000/products',{
+  const saveProduct = async (title, price)=>{//OK
+    await axios.post('http://localhost:5000/products',{
         title,
         price
       })
-      .then(navigate('/dashboard'))
+      getProducts()
   }
 
   const handleShowInputForm=()=>{

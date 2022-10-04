@@ -24,7 +24,7 @@ if(user ==="Guest"){
                 {props.productProps.map((product, index) =>(
                   <Product
                     //className="product-item"
-                    index= {index + 1}
+                    index= {index +1 }
                     key={product.id}
                     /* color={product.votes<1 ? "red":"black"} */
                     product={product}

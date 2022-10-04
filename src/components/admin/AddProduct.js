@@ -4,15 +4,16 @@ import React from 'react';
 
 import ProductForm from "./ProductForm";
 
-const AddProduct =(props)=>{ 
-  
+const AddProduct =(props)=>{
+
   return(
     <>
-      <ProductForm 
+      <ProductForm
         handleSubmit={props.saveProduct}
         buttonText ={"Add"}
+        formHeading ={"Add Product"}
       />
-    </>    
+    </>
   )
 }
 export default AddProduct
