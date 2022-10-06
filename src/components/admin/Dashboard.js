@@ -43,6 +43,7 @@ export default function Dashboard(){
         price
       })
       getProducts()
+      handleShowInputForm()
   }
 
   const handleShowInputForm=()=>{

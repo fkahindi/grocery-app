@@ -11,7 +11,7 @@ const ProductList =(props)=>{
             <th>No.</th>
             <th>Name</th>
             <th>Price</th>
-            <th colSpan={2}>Actions</th>
+            <th colSpan={3}>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -20,6 +20,9 @@ const ProductList =(props)=>{
               <td>{index+1}</td>
               <td>{product.title}</td>
               <td>{product.price}</td>
+              <td>
+                <Link to={`/view/${product.id}`} className="button">View</Link>
+              </td>
               <td>
                 <Link to={`/edit/${product.id}`} className="button">Edit</Link>
               </td>

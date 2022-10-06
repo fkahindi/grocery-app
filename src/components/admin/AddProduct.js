@@ -9,7 +9,7 @@ const AddProduct =(props)=>{
   return(
     <>
       <ProductForm
-        handleSubmit={props.saveProduct}
+        onSubmit={props.saveProduct}
         buttonText ={"Add"}
         formHeading ={"Add Product"}
       />

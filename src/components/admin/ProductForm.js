@@ -1,56 +1,58 @@
-import React,{useState, useEffect, useRef} from 'react';
+import React from 'react';
+import { useForm } from 'react-hook-form';
 
 const ProductForm = (props)=>{
-  const [inputText, setInputText] =useState({
-    title:"",
-    price:""
-  })
+  const {register, handleSubmit, formState: {errors}} = useForm()
 
-  const inputFocus = useRef(inputText)
-  useEffect(()=>{
-    inputFocus.current.focus()
-  },[])
+  const postData=(data)=>{
+    props.onSubmit(data.title, data.price)
+  }
 
-  const checkForm =(e)=>{
-    e.preventDefault()
-    if(inputText.title.trim() && inputText.price.trim()){
-      props.handleSubmit(inputText.title,inputText.price)
-      setInputText({title:"", price:""})
-    }else{
-      alert("Fill product field.")
-    }
-  }
-  const handleChange =e=>{
-    setInputText({
-      ...inputText,
-      [e.target.name] : e.target.value
-    })
-  }
+  const handleError = (errors)=>{}
+
   return(
-    <form className="form-container" onSubmit={checkForm}>
+    <form className="form-container" onSubmit={handleSubmit(postData, handleError)}>
       <h3 className="form-heading">{props.formHeading}</h3>
-      <input
-        className="input-text"
-        placeholder="Add product item ..."
-        ref={inputFocus}
-        onChange={handleChange}
-        name="title"
-        value={inputText.title}
-      />
-      <input
-        className="input-text"
-        placeholder="Add price..."
-        onChange={handleChange}
-        name="price"
-        value={inputText.price}
-      />
+      <div>
+        <label className="input-label">Title:</label>
+        <input
+          name="title"
+          type="text"
+          {...register('title', {required: "Title required"})}
+          className="input-text"
+          placeholder="Add product item ..."
+        />
+        <div className='error'>{errors.title?.message}</div>
+      </div>
 
+      <div>
+        <label className="input-label">Price: </label>
+        <input
+          name="price"
+          type="text"
+          {...register('price', {required: "Price required"})}
+          className="input-text"
+          placeholder="Add price ..."
+        />
+        <div className='error'>{errors.price?.message}</div>
+      </div>
+
+      <div>
+        <label className="input-label">Image:</label>
+        <input
+          name="image"
+          type="file"
+          {...register('image',{required: false})}
+          className="input-text"
+        />
+      </div>
       <button
         style={{
           backgroundColor:"darkcyan",
           color:"white",
           border:"none",
-          borderRadius:"calc(0.5*40px)",
+          /* borderRadius:"calc(0.5*40px)", */
+          marginTop:"1rem",
           padding:"10px",
           cursor:"pointer"
          }}
