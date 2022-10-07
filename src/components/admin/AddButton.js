@@ -1,14 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const AddButton =({background,text, showInputForm})=>{
-  
+const AddButton =({background,text, link})=>{
+
  return(
    <button
     className="add-btn"
     style={{ backgroundColor:background}}
-    onClick={showInputForm}
    >
-     {text}
+    <Link to={link} style={{ color: "white", textDecoration:"none" }}>{text}</Link>
    </button>
  )
 }

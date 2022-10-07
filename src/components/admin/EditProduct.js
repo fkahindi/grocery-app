@@ -3,8 +3,9 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import ProductForm from './ProductForm';
+import Header from './Header';
 
-const EditProduct = (props)=>{
+const EditProduct = ()=>{
 
   const navigate = useNavigate()
   const {id} = useParams()
@@ -19,25 +20,34 @@ const EditProduct = (props)=>{
 
   console.log("Product Id: "+ id +" "+ res.data.title, res.data.price)
 
-  //update form fields with record from database
+  //Populate form fields with records from database
 
  }
 
-  const updateProduct =async (title, price)=>{//OK
+  const updateProduct =async (data)=>{//Ok
   await axios.patch(`http://localhost:5000/products/${id}`,{
-    title:title,
-    price:price,
+    title:data.title,
+    price:data.price,
+    description:data.description,
+    keywords:data.keywords,
     updatedAt: new Date()
   })
   navigate('/dashboard')
  }
 
  return(
-  <ProductForm
-    onSubmit={updateProduct}
-    buttonText={"Update"}
-    formHeading={"Edit Product"}
-  />
+  <>
+    <Header
+      link ={'/dashboard'}
+      text={"Cancel"}
+      background={"red"}
+    />
+    <ProductForm
+      onSubmit={updateProduct}
+      buttonText={"Update"}
+      formHeading={"Edit Product"}
+    />
+  </>
  )
 }
 export default EditProduct

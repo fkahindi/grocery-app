@@ -4,6 +4,27 @@
     padding: 0;
 }
 
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    padding: 0 0.25em 0.25em;
+}
+
+.link {
+    font-size: 1em;
+    text-decoration: none;
+    color: darkred;
+}
+
+.link:hover {
+    color: lightcoral;
+    text-decoration: underline;
+    text-decoration-color: lightcoral;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -127,4 +148,9 @@ tr:nth-of-type(odd) {
 .error {
     text-align: center;
     color: red;
+}
+
+.product-view {
+    margin: 1rem auto;
+    padding: 1rem;
 }

@@ -10,6 +10,7 @@ import Preferences from "./admin/Preferences";
 import Singnup from "./authentication/Signup";
 import EditProduct from "./admin/EditProduct";
 import ProductView from "./admin/ProductView";
+import AddProduct from "./admin/AddProduct";
 
 export const UserContext = createContext("")
 
@@ -84,7 +85,8 @@ const App =()=>{
           </div>
         } />
         <Route path="/dashboard/*" exact element={<div className="wrapper"><Dashboard /></div>} />
-        <Route path="/view/:id" exact element={<div className="wrappwer"><ProductView /></div>}/>
+        <Route path="/view/:id" exact element={<div className="wrappwer"><ProductView /></div>} />
+        <Route path="/add" exact element={<div className="wrapper"><AddProduct /></div>} />
         <Route path="/edit/:id" exact element={<div className="wrapper"><EditProduct /></div>}/>
         <Route path="/preferences" exact element={<div className="wrapper"><Preferences /></div>} />
         <Route path="/signup" exact element={<div className="wrapper"><Singnup /></div>} />

@@ -5,7 +5,7 @@ const ProductForm = (props)=>{
   const {register, handleSubmit, formState: {errors}} = useForm()
 
   const postData=(data)=>{
-    props.onSubmit(data.title, data.price)
+    props.onSubmit(data)
   }
 
   const handleError = (errors)=>{}
@@ -46,12 +46,37 @@ const ProductForm = (props)=>{
           className="input-text"
         />
       </div>
+
+      <div>
+        <label className="input-label">Description: </label>
+        <input
+          name="description"
+          type="text"
+          {...register('description', {required: false})}
+          className="input-text"
+          placeholder="Add description ..."
+        />
+        <div className='error'>{errors.description?.message}</div>
+      </div>
+
+      <div>
+        <label className="input-label">Keywords: </label>
+        <input
+          name="keywords"
+          type="text"
+          {...register('keywords', {required: false})}
+          className="input-text"
+          placeholder="Add keywords ..."
+        />
+        <div className='error'>{errors.keywords?.message}</div>
+      </div>
+
       <button
         style={{
           backgroundColor:"darkcyan",
           color:"white",
           border:"none",
-          /* borderRadius:"calc(0.5*40px)", */
+          borderRadius:"calc(0.5*40px)",
           marginTop:"1rem",
           padding:"10px",
           cursor:"pointer"

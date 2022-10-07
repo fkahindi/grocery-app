@@ -3,12 +3,12 @@ import AddButton from "./AddButton";
 import UserInfo from "./UserInfo";
 import NavBar from "../NavBar";
 
-const Header =({showForm, addInputForm})=>{
+const Header =(props)=>{
 
   return(
     <>
-      <UserInfo />
       <NavBar />
+       <UserInfo />
       <h1
         style={{
           fontSize: "6rem",
@@ -23,9 +23,9 @@ const Header =({showForm, addInputForm})=>{
         Groceries
       </h1>
       <AddButton
-        text ={showForm ? "Hide Form":"Add Product"}
-        background ={showForm? "red":"teal"}
-        showInputForm={addInputForm}
+        text ={props.text}
+        background ={props.background}
+        link={props.link}
       />
     </>
   )

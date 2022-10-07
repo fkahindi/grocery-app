@@ -6,7 +6,6 @@ import axios from "axios";
 
 import ProductList from "./ProductList";
 import Header from "./Header";
-import AddProduct from "./AddProduct";
 
 export const AdminContext = createContext("")
 
@@ -20,7 +19,7 @@ export default function Dashboard(){
 
   const [admin, setAdmin] = useState("Admin")
   const [products, setProducts] = useState([])
-  const[showInputForm, setShowInputForm]= useState(false)
+  //const[showInputForm, setShowInputForm]= useState(false)
 
   useEffect(()=>{
     getProducts()
@@ -37,30 +36,15 @@ export default function Dashboard(){
     getProducts()
   }
 
-  const saveProduct = async (title, price)=>{//OK
-    await axios.post('http://localhost:5000/products',{
-        title,
-        price
-      })
-      getProducts()
-      handleShowInputForm()
-  }
-
-  const handleShowInputForm=()=>{
-    setShowInputForm(!showInputForm)
-  }
-
   return(
     <>
       <AdminContext.Provider value={admin}>
         <Header
-         addInputForm={handleShowInputForm}
-          showForm ={showInputForm}
+          link ={'/add'}
+          text={"Add Product"}
+          background={"teal"}
        />
       </AdminContext.Provider>
-      <div>
-        {showInputForm && <AddProduct saveProduct={saveProduct} />}
-      </div>
 
       <div className="container">
         <ProductList
@@ -68,7 +52,6 @@ export default function Dashboard(){
           products ={products}
           deleteProduct={deleteProduct}
         />
-
       </div>
     </>
   )
