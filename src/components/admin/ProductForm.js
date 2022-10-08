@@ -2,7 +2,15 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 
 const ProductForm = (props)=>{
-  const {register, handleSubmit, formState: {errors}} = useForm()
+
+  const {register, handleSubmit, formState: {errors}} = useForm({
+    defaultValues: {
+      title: props.fetchedValues.title,
+      price: props.fetchedValues.price,
+      description: props.fetchedValues.description,
+      keywords: props.fetchedValues.keywords
+    }
+  })
 
   const postData=(data)=>{
     props.onSubmit(data)
@@ -18,7 +26,7 @@ const ProductForm = (props)=>{
         <input
           name="title"
           type="text"
-          {...register('title', {required: "Title required"})}
+          {...register('title', {required: "Title is required"})}
           className="input-text"
           placeholder="Add product item ..."
         />
@@ -30,7 +38,7 @@ const ProductForm = (props)=>{
         <input
           name="price"
           type="text"
-          {...register('price', {required: "Price required"})}
+          {...register('price', {required: "Price is required"})}
           className="input-text"
           placeholder="Add price ..."
         />

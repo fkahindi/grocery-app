@@ -30,6 +30,7 @@ const AddProduct =()=>{
         onSubmit={saveProduct}
         buttonText ={"Add"}
         formHeading ={"Add Product"}
+        fetchedValues ={""}
       />
     </>
   )

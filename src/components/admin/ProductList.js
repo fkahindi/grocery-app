@@ -21,13 +21,13 @@ const ProductList =(props)=>{
               <td>{product.title}</td>
               <td>{product.price}</td>
               <td>
-                <Link to={`/view/${product.id}`} className="button">View</Link>
+                <Link to={`/view/${product.id}`} className="btn">View</Link>
               </td>
               <td>
-                <Link to={`/edit/${product.id}`} className="button">Edit</Link>
+                <Link to={`/edit/${product.id}`} className="btn">Edit</Link>
               </td>
               <td>
-                <button onClick={()=>props.deleteProduct(product.id)} className="button">Delete</button>
+                <button onClick={()=>props.deleteProduct(product.id)} className="btn">Delete</button>
               </td>
             </tr>
           ))}

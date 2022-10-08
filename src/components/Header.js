@@ -1,13 +1,13 @@
 import React from "react";
 import UserInfo from "./UserInfo";
-import Nav from "./NavBar";
+import NavBar from "./NavBar";
 
 const Header =({showForm, addInputForm})=>{
 
   return(
     <>
+      <NavBar />
       <UserInfo />
-      <Nav />
       <h1
         style={{
           fontSize: "6rem",

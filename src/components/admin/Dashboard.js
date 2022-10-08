@@ -1,5 +1,7 @@
-import React,{useState, useEffect,createContext} from "react";
+import React,{useState, useEffect, createContext} from "react";
 import axios from "axios";
+import {confirmAlert} from "react-confirm-alert"
+import "react-confirm-alert/src/react-confirm-alert.css"
 
 //import Login from "../authentication/Login";
 //import useToken from "./useToken"
@@ -19,7 +21,8 @@ export default function Dashboard(){
 
   const [admin, setAdmin] = useState("Admin")
   const [products, setProducts] = useState([])
-  //const[showInputForm, setShowInputForm]= useState(false)
+  const [message, setMessage] = useState("")
+
 
   useEffect(()=>{
     getProducts()
@@ -31,9 +34,35 @@ export default function Dashboard(){
     setProducts(response.data.sort((a,b)=>a.title > b.title ? 1:-1))
   }
 
-  const deleteProduct = async (id)=>{//OK
-    await axios.delete(`http://localhost:5000/products/${id}`)
-    getProducts()
+  const deleteProduct = (id)=>{//OK
+    confirmAlert({
+      title:"Confirm Delete",
+      message: "Are you sure? Deleted product cannot be recovered.",
+      buttons:[
+        {
+          label: "Yes",
+          onClick:  async ()=>{
+            const res = await axios.delete(`http://localhost:5000/products/${id}`)
+            getProducts()
+
+            setMessage(res.data.message)
+          }
+          },
+          {
+            label: "No",
+            onClick: ()=>{return}
+          }
+      ],
+      closeOnEscape: true,
+      closeOnClickOutside:true,
+      willUnmount:()=>{},
+      keyCodeForClose:[8,32],
+      afterClose:()=>{},
+      onClickOutside:()=>{},
+      onKeypress:()=>{},
+      onKeypressEscape:()=>{},
+      overlayClassName:"overlay-custom-class-name",
+    })
   }
 
   return(
@@ -43,6 +72,7 @@ export default function Dashboard(){
           link ={'/add'}
           text={"Add Product"}
           background={"teal"}
+          message={message}
        />
       </AdminContext.Provider>
 

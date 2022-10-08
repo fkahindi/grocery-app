@@ -5,7 +5,7 @@ const AddButton =({background,text, link})=>{
 
  return(
    <button
-    className="add-btn"
+    className="btn add-btn"
     style={{ backgroundColor:background}}
    >
     <Link to={link} style={{ color: "white", textDecoration:"none" }}>{text}</Link>

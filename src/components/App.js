@@ -4,7 +4,7 @@ import axios from "axios";
 
 import '../App.css'
 import Header from "./Header";
-import ProductList from "./ProductList";
+import Products from "./Products";
 import Dashboard from "./admin/Dashboard";
 import Preferences from "./admin/Preferences";
 import Singnup from "./authentication/Signup";
@@ -19,9 +19,6 @@ const App =()=>{
   //const user = "Francis"
   const [user, setUser] =useState("Guest")
   const [products, setProducts] =useState([])
-  const [upvote, setUpvote] = useState(0)
-  const [downvote, setDownvote] = useState(0)
-
 
   /* useEffect(()=>{
     fetch('localhost:8080/login')
@@ -40,32 +37,10 @@ const App =()=>{
   },[])
 
   const getProducts = async ()=>{
-    //retrive products from server
 
      const res = await axios.get('http://localhost:5000/products')
      setProducts(res.data.sort((a,b)=>a.title > b.title ? 1 : -1))
   }
-
-
- const upVote = async(id)=>{
-
-    const res = await axios.patch(`http://localhost:5000/products/${id}`,{
-      upVote: upvote + 1
-    })
-
-
-   setUpvote(res.data.upVote)
-   console.log(res.data.upVote)
- }
-
- const downVote= async(id)=>{
-  const res = await axios.patch(`http://localhost:5000/products/${id}`,{
-      downVote: downvote - 1
-    })
-
-   setDownvote(res.data.downVote)
-   console.log(res.data.upVote)
- }
 
   return(
     <>
@@ -76,11 +51,8 @@ const App =()=>{
               <Header   />
             </UserContext.Provider>
 
-          <ProductList
-            className="product-list"
+          <Products
             productProps={products}
-            handleUpVote={upVote}
-            handleDownVote={downVote}
           />
           </div>
         } />
