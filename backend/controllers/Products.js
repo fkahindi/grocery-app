@@ -26,7 +26,7 @@ export const createProduct = async (req,res)=>{
   try {
     await Product.create(req.body);
     res.json({
-      "message":"Product created"
+      "message":"product create successful"
     })
   } catch (error) {
     res.json({message:error.message});
@@ -41,7 +41,7 @@ export const updateProduct = async (req,res)=>{
       }
     });
     res.json({
-      "message":"Product updated"
+      "message":"product update successful"
     })
   } catch (error) {
     res.json({message:error.message})
@@ -56,7 +56,7 @@ export const deleteProduct = async (req,res)=>{
       }
     });
     res.json({
-      "message":"Product deleted"
+      "message":"Product deleted successfully"
     });
   } catch (error) {
     res.json({message:error.message})

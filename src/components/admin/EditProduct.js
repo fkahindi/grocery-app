@@ -1,6 +1,6 @@
 import React,{useState, useEffect}from 'react';
 import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, createSearchParams } from 'react-router-dom';
 
 import ProductForm from './ProductForm';
 import Header from './Header';
@@ -8,7 +8,8 @@ import Header from './Header';
 const EditProduct = ()=>{
 
   const [values, setValues] = useState("")
-  //const [message, setMessage] = useState("")
+  const [message, setMessage] = useState("")
+
   const navigate = useNavigate()
   const {id} = useParams()
 
@@ -29,7 +30,7 @@ const EditProduct = ()=>{
   },[id])
 
   const updateProduct =async (data)=>{//Ok
-  //process image first
+  //process image first before updated
 
   const res = await axios.patch(`http://localhost:5000/products/${id}`,{
     title:data.title,
@@ -39,9 +40,19 @@ const EditProduct = ()=>{
     updatedAt: new Date()
   })
 
-  //Set reponse message and export it to dashboard
+  //Send update response back with url
+  const getMessage = ()=>{
+    const message = data.title.toUpperCase() + ", " + res.data.message
+    navigate({
+      pathname: "/dashboard",
+      search: createSearchParams({
+        message:message
+      }).toString()
+    })
+  }
 
-  navigate('/dashboard', /* setMessage(res.data.message) */)
+  setMessage(res.data.message)
+  getMessage()
 
  }
 
@@ -51,6 +62,7 @@ const EditProduct = ()=>{
       link ={'/dashboard'}
       text={"Cancel"}
       background={"red"}
+      message ={message}
     />
     {values ?
     <ProductForm
@@ -59,7 +71,7 @@ const EditProduct = ()=>{
       formHeading={"Edit Product"}
       fetchedValues={values}
     />
-    : <div>Something gone wrong... </div>}
+    : <div className="error">Something gone wrong... </div>}
   </>
  )
 }

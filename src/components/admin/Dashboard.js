@@ -2,6 +2,7 @@ import React,{useState, useEffect, createContext} from "react";
 import axios from "axios";
 import {confirmAlert} from "react-confirm-alert"
 import "react-confirm-alert/src/react-confirm-alert.css"
+import { useSearchParams } from "react-router-dom";
 
 //import Login from "../authentication/Login";
 //import useToken from "./useToken"
@@ -18,11 +19,10 @@ export default function Dashboard(){
   if(!token){
     return <Login setToken={setToken}/>
   } */
-
+  const [searchParams] = useSearchParams()
   const [admin, setAdmin] = useState("Admin")
   const [products, setProducts] = useState([])
   const [message, setMessage] = useState("")
-
 
   useEffect(()=>{
     getProducts()
@@ -72,7 +72,7 @@ export default function Dashboard(){
           link ={'/add'}
           text={"Add Product"}
           background={"teal"}
-          message={message}
+          message={message? message : searchParams.get("message")}
        />
       </AdminContext.Provider>
 
