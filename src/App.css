@@ -33,8 +33,8 @@ nav ul li {
 }
 
 .form-container {
-    max-width: 50%;
-    min-width: 300px;
+    max-width: 400px;
+    min-width: 250px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -64,8 +64,7 @@ nav ul li {
     font-weight: 400;
     width: 100%;
     margin: 0.2rem auto;
-    padding-right: 5px;
-    padding-left: 10px;
+    padding: 0.5em 10px;
     border: thin solid lightgray;
     /* border-radius: calc(0.5 * 100px); */
     transition: ease-in-out, width .35s ease-in-out;
@@ -82,6 +81,15 @@ nav ul li {
 }
 
 .btn:hover {
+    cursor: pointer;
+}
+
+.submit-btn {
+    background-color: darkcyan;
+    color: white;
+    border: none;
+    margin-top: 1rem;
+    padding: 10px;
     cursor: pointer;
 }
 
@@ -136,12 +144,7 @@ tr:nth-of-type(odd) {
     font-size: large;
 }
 
-.danger {
-    color: red;
-}
-
 .error {
-    text-align: center;
     color: red;
 }
 

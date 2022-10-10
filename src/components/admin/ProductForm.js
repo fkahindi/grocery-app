@@ -57,13 +57,12 @@ const ProductForm = (props)=>{
 
       <div>
         <label className="input-label">Description: </label>
-        <input
+        <textarea
           name="description"
-          type="text"
           {...register('description', {required: false})}
           className="input-text"
           placeholder="Add description ..."
-        />
+        ></textarea>
         <div className='error'>{errors.description?.message}</div>
       </div>
 
@@ -79,17 +78,7 @@ const ProductForm = (props)=>{
         <div className='error'>{errors.keywords?.message}</div>
       </div>
 
-      <button
-        style={{
-          backgroundColor:"darkcyan",
-          color:"white",
-          border:"none",
-          borderRadius:"calc(0.5*40px)",
-          marginTop:"1rem",
-          padding:"10px",
-          cursor:"pointer"
-         }}
-      >
+      <button className="submit-btn">
         {props.buttonText}
       </button>
     </form>

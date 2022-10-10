@@ -8,6 +8,7 @@ import Products from "./Products";
 import Dashboard from "./admin/Dashboard";
 import Preferences from "./admin/Preferences";
 import Singnup from "./authentication/Signup";
+import Login from "./authentication/Login";
 import EditProduct from "./admin/EditProduct";
 import ProductView from "./admin/ProductView";
 import AddProduct from "./admin/AddProduct";
@@ -62,6 +63,7 @@ const App =()=>{
         <Route path="/edit/:id" exact element={<div className="wrapper"><EditProduct /></div>}/>
         <Route path="/preferences" exact element={<div className="wrapper"><Preferences /></div>} />
         <Route path="/signup" exact element={<div className="wrapper"><Singnup /></div>} />
+        <Route path="/login" exaxt element={<div className="wrapper"><Login /></div>} />
       </Routes>
     </>
   )

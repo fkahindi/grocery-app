@@ -1,140 +1,106 @@
-import React,{useState} from 'react';
+import React, {useState} from 'react';
+import axios from 'axios';
+import { useForm } from 'react-hook-form';
+import { useNavigate} from 'react-router-dom';
 
-import "./Auth.css";
+import "../../App.css"
 
 export default function Singnup(){
 
-  const [inputText, setInputText] = useState({
-    userName: "",
-    email: "",
-    password:"",
-    confirmPassword: "",
-  })
+  const [message, setMessage] = useState("")
+  const {register, handleSubmit, formState: {errors}} = useForm("")
+  const navigate = useNavigate()
 
-  const [submitted, setSubmitted] = useState(false)
-  const [formError, setFormError] = useState(false)
-  const [nameError, setNameError] = useState("")
-  const [emailError, setEmailError] = useState("")
-  const [passwordError, setPasswordError] = useState("")
-  const [confirmPasswordError, setConfirmPasswordError] = useState("")
+  const onSubmit = async (data)=>{
+    if(data.password !== data.confirmPassword){
+      setMessage("Your passwords do not much")
+      errors.confirmPassword ={message}
+      return errors.confirmPassword
+    }
+ /*   const res = await axios.post('localhost:5000/users',{
+    firstname: data.firstname,
+    lastname: data.lastname,
+    email: data.email,
+    password: data.password,
+   });
 
-  const handleInputChange = e =>{
-    setInputText({
-      ...inputText,
-      [e.target.name] : e.target.value
-    })
-    setSubmitted(false)
-  }
-  
-  const handleSubmit = e =>{
-    e.preventDefault()
-    
-    if(!inputText.userName.trim()){
-      setFormError(true)
-      setNameError("Username is required")
-    }
-    if(!inputText.email.trim()){
-      setFormError(true)
-      setEmailError("Email is requird")
-    }
-    if(!inputText.password.trim()){
-      setFormError(true)
-      setPasswordError("Password is requird")
-    }
-    if(!inputText.confirmPassword.trim()){
-      setFormError(true)
-      setConfirmPasswordError("Confirm password")
-    }
-    if(!formError){
-      setSubmitted(false)            
-    }else{
-      setFormError(false)
-      setSubmitted(true)
-      console.log(JSON.stringify(inputText, null,2))
-      setInputText({
-        userName:"",
-        email:"",
-        password:"",
-        confirmPassword:"",
-      })
-    }    
-  }
-  
-  const successMessage =()=>{
-    return (
-      <div
-        className="success"
-        style={{ 
-          display: submitted ? "" : "none"
-         }}
-      >
-         <h4>User successfully registered! </h4>
-      </div>
-    )
+   setMessage(res.message) */
+
+    console.log(data)
+    navigate('/login')
   }
 
-  const errorMessage = ()=>{
-    return(
-      <div
-        className="error"
-        style={{ 
-          display: formError? "": "none"
-         }}
-      >
-        <h4>Fix form errors!</h4>
-      </div>
-    )
-  }
+  const onErrors = (errors)=>{}
   return(
-    <div className="form-wrapper" onSubmit={handleSubmit}>
-      <h1>Please Signup</h1>
-      <form className="form"> 
-        <div className="messages">
-          {successMessage()}
-          {errorMessage()}
+    <>
+      <form className="form-container" onSubmit={handleSubmit(onSubmit, onErrors)}>
+        <h3 className="form-heading">Signup</h3>
+        <div>
+          <label className="input-label">Firstname:</label>
+          <input
+            type="text"
+            name="firstname"
+            {...register('firstname', {required: "Firsname is required"})}
+            className="input-text"
+            placeholder="Firstname here..."
+          />
+          <div className='error'>{errors.firstname?.message}</div>
         </div>
-        <label htmlFor="userName" className="form-lbl">Username:</label>
-        <input 
-          type="text"
-          name="userName"
-          value={inputText.userName}
-          placeholder="Username here..."
-          onChange={handleInputChange}
-        />
-        <div className="error">{nameError? nameError:"" }</div> 
 
-        <label htmlFor="email" className="form-lbl">Email:</label>     
-        <input 
-          type="email"
-          name="email"
-          value={inputText.email}
-          placeholder="Type email..."
-          onChange={handleInputChange}
-        />
-        <div className="error">{emailError? emailError:"" }</div>
+        <div>
+           <label className="input-label">Lastname:</label>
+          <input
+            type="text"
+            name="lastname"
+            {...register('lastname', {required: "Lastname is required"})}
+            className="input-text"
+            placeholder="Lastname here..."
+          />
+          <div className="error">{errors.lastname?.message}</div>
+        </div>
 
-        <label htmlFor="password" className="form-lbl">Password:</label>
-        <input 
-          type="password"
-          name="password"
-          value={inputText.password}
-          placeholder="Type password..."
-          onChange={handleInputChange}
-        />
-        <div className="error">{passwordError? passwordError :"" }</div>
-        
-        <label htmlFor="confirmPassword" className="form-lbl">Confirm Password:</label>
-        <input 
-          type="password"
-          name="confirmPassword"
-          value={inputText.confirmPassword}
-          placeholder="Confirm password..."
-          onChange={handleInputChange}
-        />
-        <div className="error">{confirmPasswordError? confirmPasswordError:""}</div>
-        
+        <div>
+          <label className="input-label">Email:</label>
+          <input
+            type="email"
+            name="email"
+            {...register('email', {required: "Email is required"})}
+            className="input-text"
+            placeholder="Type email..."
+          />
+          <div className="error">{errors.email?.message }</div>
+        </div>
+
+        <div>
+          <label className="input-label">Password:</label>
+          <input
+            type="password"
+            name="password"
+            {...register('password', {required: "Password is required",
+            minLength:{
+              value:8,
+              message: "Password must have atleast 8 characters"
+            }
+          })}
+            className="input-text"
+            placeholder="Type password..."
+          />
+          <div className="error">{errors.password?.message}</div>
+        </div>
+
+        <div>
+          <label className="input-label">Confirm Password:</label>
+          <input
+            type="password"
+            name="confirmPassword"
+            {...register('confirmPassword', {required: "Password should be confirmed"})}
+            className="input-text"
+            placeholder="Confirm password..."
+          />
+          <div className="error">{errors.confirmPassword?.message} {message}</div>
+        </div>
         <button className="submit-btn">Signup</button>
       </form>
-    </div>    
+    </>
   )
 }
