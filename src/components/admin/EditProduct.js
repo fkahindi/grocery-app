@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate, useParams, createSearchParams } from 'react-router-dom';
 
 import ProductForm from './ProductForm';
-import Header from './Header';
+import Header from '../Header';
 
 const EditProduct = ()=>{
 
@@ -53,7 +53,6 @@ const EditProduct = ()=>{
 
   setMessage(res.data.message)
   getMessage()
-
  }
 
  return(

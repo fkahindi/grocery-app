@@ -1,5 +1,6 @@
-import React,{useContext} from 'react';
-import {AdminContext} from './Dashboard';
+import React, {useContext} from 'react';
+
+import {UserContext} from './Dashboard';
 
 
 function UserInfo(){
@@ -9,7 +10,7 @@ function UserInfo(){
     </UserContext.Consumer>
   ) */
 
-  const user = useContext(AdminContext)
+  const user = useContext(UserContext)
   return <span>User: {user}</span>
 
 }

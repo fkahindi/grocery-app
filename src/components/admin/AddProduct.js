@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import { useNavigate, createSearchParams } from 'react-router-dom';
 
-import Header from './Header';
+import Header from '../Header';
 import ProductForm from "./ProductForm";
 
 

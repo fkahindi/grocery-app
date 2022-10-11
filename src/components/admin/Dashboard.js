@@ -8,9 +8,9 @@ import { useSearchParams } from "react-router-dom";
 //import useToken from "./useToken"
 
 import ProductList from "./ProductList";
-import Header from "./Header";
+import Header from "../Header";
 
-export const AdminContext = createContext("")
+export const UserContext = createContext("")
 
 export default function Dashboard(){
 
@@ -20,7 +20,7 @@ export default function Dashboard(){
     return <Login setToken={setToken}/>
   } */
   const [searchParams] = useSearchParams()
-  const [admin, setAdmin] = useState("Admin")
+  const [user, setUser] = useState("Admin")
   const [products, setProducts] = useState([])
   const [message, setMessage] = useState("")
 
@@ -67,14 +67,15 @@ export default function Dashboard(){
 
   return(
     <>
-      <AdminContext.Provider value={admin}>
+      <UserContext.Provider value={"Admin"}>
         <Header
           link ={'/add'}
           text={"Add Product"}
           background={"teal"}
           message={message? message : searchParams.get("message")}
+          user={user}
        />
-      </AdminContext.Provider>
+      </UserContext.Provider>
 
       <div className="container">
         <ProductList

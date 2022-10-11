@@ -13,12 +13,12 @@ import EditProduct from "./admin/EditProduct";
 import ProductView from "./admin/ProductView";
 import AddProduct from "./admin/AddProduct";
 
+//export const UserContext = createContext("")
 export const UserContext = createContext("")
-
 const App =()=>{
 
   //const user = "Francis"
-  const [user, setUser] =useState("Guest")
+  const [user, setUser] = useState("")
   const [products, setProducts] =useState([])
 
   /* useEffect(()=>{
@@ -47,14 +47,17 @@ const App =()=>{
     <>
       <Routes>
         <Route path="/" exact element={
-          <div className="container">
-            <UserContext.Provider value={user}>
-              <Header   />
+          <div>
+            <UserContext.Provider value={"Guest"}>
+              <Header
+                user={user}
+              />
             </UserContext.Provider>
-
-          <Products
-            productProps={products}
-          />
+          <div className="container">
+            <Products
+              productProps={products}
+            />
+          </div>
           </div>
         } />
         <Route path="/dashboard/*" exact element={<div className="wrapper"><Dashboard /></div>} />
