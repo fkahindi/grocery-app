@@ -12,7 +12,7 @@ const User = db.define('users',{
     type:DataTypes.STRING
   },
   role_id:{
-    type:DataTypes.INT
+    type:DataTypes.INTEGER
   },
   email:{
     type:DataTypes.STRING
