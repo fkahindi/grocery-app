@@ -1,4 +1,4 @@
-import User from "../models/userModel.js";
+/* import User from "../models/user.model.js";
 
 export const getAllUsers = async (req, res)=>{
   try {
@@ -63,3 +63,4 @@ export const deleteUser = async (req,res)=>{
   }
 }
 
+ */
